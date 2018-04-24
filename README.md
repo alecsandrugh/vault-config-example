@@ -95,5 +95,7 @@ sudo systemctl start consul.service
 For ease of testing, environment variables can be set by creating a profile script, located in [/etc/profile.d/vault.sh](vault.sh)
 
 Ensure permissions are set properly for the above script
-chmod +x /etc/profile.d/vault.sh
 
+```
+chmod +x /etc/profile.d/vault.sh
+```
