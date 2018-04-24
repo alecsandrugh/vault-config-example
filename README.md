@@ -1,12 +1,14 @@
 # Example configuration for Vault cluster with Consul backend 
 
 The code in this repository was created by [Brian Green](https://github.com/greenbrian)
+
 In order to set up Vault working in Cluster mode, an HA Backend is required. The recommended backend is Consul. Please refer to the Backend Reference on https://www.vaultproject.io/docs/config/ for more information.
 
 This section outlines some installation steps. At a high level they are as follows:
-Install service account users (users ‘vault’ and ‘consul’)
-Install Vault and Consul binaries 
-Install Systemd scripts and dependencies
+
+- Install service account users (users ‘vault’ and ‘consul’)
+- Install Vault and Consul binaries 
+- Install Systemd scripts and dependencies
 
 First service account users should be configured. The following script will require sudo/root permissions and will configure users on either Ubuntu or RHEL based systems.  
 
@@ -37,21 +39,21 @@ sudo mkdir -pm 0755 /opt/consul/data
 
 In order to run the applications on modern Linux operating systems a Systemd unit file is required for both Consul and Vault. [This example](vault.service)  can be used as a reference Systemd file for Vault.
 
-RHEL location: /etc/systemd/system/vault.service
-Ubuntu location: /lib/systemd/system/vault.service
+- RHEL location: /etc/systemd/system/vault.service
+- Ubuntu location: /lib/systemd/system/vault.service
 
 [This other example](consul.service) can be used as a reference Systemd file for Consul:
 
-RHEL location: /etc/systemd/system/consul.service
-Ubuntu location: /lib/systemd/system/consul.service
+- RHEL location: /etc/systemd/system/consul.service
+- Ubuntu location: /lib/systemd/system/consul.service
 
 Vault should only be started once the Consul cluster is formed. There is an [additional script](consul-online.sh) and [Systemd configuration](consul-online.service) that performs Consul cluster validation.
 
-RHEL location: /etc/systemd/system/consul-online.service
-Ubuntu location: /lib/systemd/system/consul-online.service
+- RHEL location: /etc/systemd/system/consul-online.service
+- Ubuntu location: /lib/systemd/system/consul-online.service
 
-RHEL location: /etc/systemd/system/consul-online.target
-Ubuntu location: /lib/systemd/system/consul-online.target
+- RHEL location: /etc/systemd/system/consul-online.target
+- Ubuntu location: /lib/systemd/system/consul-online.target
 
 Permissions should be configured appropriately and then the services can be enabled.
 ```
@@ -78,6 +80,7 @@ bootstrap_expect: This value should match the total number of Consul servers (us
 advertise_addr: This value should match the private IP address of the local server
 retry_join: This value should be a list of IP addresses of the other nodes in the cluster
 ```
+
 The configuration directories and files should have permissions set appropriately as well.
 ```
 sudo chown -R consul:consul /etc/consul.d /opt/consul
